@@ -78,7 +78,7 @@ export function ServiceList() {
             value={searchQuery}
             onChange={(e) => handleSearchChange(e.target.value)}
             placeholder="서비스 이름이나 설명으로 검색..."
-            className="w-full pl-10 pr-10 py-3 border border-gray-300 rounded-lg focus:outline-nonetext-base text-black"
+            className="w-full pl-10 pr-10 py-3 border border-gray-300 rounded-lg focus:outline-none text-base text-black"
           />
           <div className="absolute left-3 top-1/2 transform -translate-y-1/2">
             <svg
@@ -160,18 +160,23 @@ export function ServiceList() {
             </p>
           </div>
         )}
-
-        {/* 무한 스크롤 트리거 */}
-        <div ref={loadMoreRef} className="h-4">
-          {isFetchingNextPage && (
-            <>
-              {Array.from({ length: 3 }).map((_, index) => (
-                <ListLoader key={`loading-${index}`} />
-              ))}
-            </>
-          )}
-        </div>
       </div>
+
+      <div ref={loadMoreRef} className="w-full">
+        {isFetchingNextPage && (
+          <div className="divide-y divide-gray-100">
+            {Array.from({ length: 3 }).map((_, index) => (
+              <ListLoader key={`loading-${index}`} />
+            ))}
+          </div>
+        )}
+        {!hasNextPage && flattenedItems.length > 0 && (
+          <div className="p-4 text-center text-gray-500 text-sm">
+            모든 서비스를 불러왔습니다.
+          </div>
+        )}
+      </div>
+
       <BottomSheetModal
         isOpen={isModalOpen}
         onClose={handleCloseModal}

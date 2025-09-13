@@ -149,27 +149,26 @@ const mockServices: Service[] = [
   }
 ];
 
-// // 1000개 이상의 Mock 데이터 생성을 위한 확장
-// const generateExtendedServices = (): Service[] => {
-//   const baseServices = [...mockServices];
-//   const extendedServices: Service[] = [];
+// infiniteScroll 데이터 생성을 위한 함수
+const generateExtendedServices = (): Service[] => {
+  const baseServices = [...mockServices];
+  const moreServices: Service[] = [];
 
-//   for (let i = 0; i < 200; i++) {
-//     // 200번 반복해서 1800개 추가 생성
-//     baseServices.forEach((service, index) => {
-//       const duplicatedService: Service = {
-//         ...service,
-//         id: `${service.id}-${i}-${index}`,
-//         name: `${service.name} ${i + 1}-${index + 1}`,
-//       };
-//       extendedServices.push(duplicatedService);
-//     });
-//   }
+  for (let i = 0; i < 50; i++) {
+    baseServices.forEach((service) => {
+      const duplicatedService: Service = {
+        ...service,
+        id: `${service.id}-${i}`,
+        name: `${service.name} ${i + 1}`
+      };
+      moreServices.push(duplicatedService);
+    });
+  }
 
-//   return [...baseServices, ...extendedServices];
-// };
+  return [...baseServices, ...moreServices];
+};
 
-// const allServices = generateExtendedServices();
+const extendedServices = generateExtendedServices();
 
 const filterServices = (
   services: Service[],
@@ -225,7 +224,7 @@ export default async function handler(
       searchQuery: search as string
     };
 
-    const filteredServices = filterServices(mockServices, filters);
+    const filteredServices = filterServices(extendedServices, filters);
 
     const startIndex = (pageNum - 1) * limitNum;
     const endIndex = startIndex + limitNum;

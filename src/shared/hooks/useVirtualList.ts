@@ -16,7 +16,7 @@ export const useVirtualList = ({
   isFetchingNextPage
 }: UseVirtualListProps) => {
   const { ref: loadMoreRef, inView } = useInView({
-    threshold: 0,
+    threshold: 0.1,
     rootMargin: "100px"
   });
 
