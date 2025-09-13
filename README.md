@@ -12,7 +12,7 @@
 
 - **Tailwind**
 
-### UI 컴포넌트 & 상호작용
+### UI 컴포넌트
 
 - **react-slick** - 캐러셀/슬라이더 컴포넌트
 - **react-intersection-observer** - 무한 스크롤 구현
