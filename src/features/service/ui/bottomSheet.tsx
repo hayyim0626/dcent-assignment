@@ -70,6 +70,7 @@ export function BottomSheetModal({
                 alt={data.name}
                 width={64}
                 height={64}
+                loading="lazy"
               />
               <div>
                 <h2 className="text-xl font-bold text-gray-900">{data.name}</h2>

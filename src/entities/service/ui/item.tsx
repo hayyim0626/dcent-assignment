@@ -24,7 +24,13 @@ export function ServiceItem({ service, language, onClick }: ServiceListProps) {
       className="flex items-center space-x-4 p-4 hover:bg-gray-50 transition-colors cursor-pointer"
       onClick={handleClick}
     >
-      <Image src={service.iconUrl} width={48} height={48} alt="img" />
+      <Image
+        src={service.iconUrl}
+        width={48}
+        height={48}
+        alt="img"
+        loading="lazy"
+      />
       <div>
         <h3 className="font-semibold text-gray-900 truncate text-base">
           {service.name}

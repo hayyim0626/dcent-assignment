@@ -60,6 +60,7 @@ export function BannerCarousel({ lang }: BannerCarouselProps) {
             layout="fill"
             objectFit="cover"
             objectPosition="center"
+            loading="lazy"
           />
           <div className="relative p-8 z-10 flex h-full flex-col items-start text-white px-4">
             {banner[lang].description && (

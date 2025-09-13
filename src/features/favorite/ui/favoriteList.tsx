@@ -83,8 +83,9 @@ export function FavoriteList() {
                   src={item.iconUrl}
                   width={48}
                   height={48}
-                  alt="img"
+                  alt={item.name}
                   className="mr-4"
+                  loading="lazy"
                 />
                 <div className="flex-1 min-w-0">
                   <h3 className="font-medium text-gray-900 truncate max-w-[334px]">
