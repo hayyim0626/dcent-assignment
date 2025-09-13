@@ -1,24 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { ServiceItem } from "@/entities/service/ui/item";
 import { Service } from "@/entities/service/types";
 import { useServiceList } from "@/entities/service/hooks/useServiceList";
 import { useInfiniteScroll, useSearch } from "@/shared/hooks";
 import { ListLoader } from "@/shared/ui";
-import { detectLanguage, detectPlatform } from "@/shared/config/environment";
 import { BottomSheetModal } from "./bottomSheet";
 
-export function ServiceList() {
-  const [currentLanguage, setCurrentLanguage] = useState<"ko" | "en">("ko");
-  const [currentPlatform, setCurrentPlatform] = useState<"android" | "ios">(
-    "ios"
-  );
+interface ServiceListProps {
+  lang: "en" | "ko";
+  platform: "ios" | "android";
+}
+
+export function ServiceList({ lang, platform }: ServiceListProps) {
   const { searchQuery, debouncedQuery, handleSearchChange, clearSearch } =
     useSearch();
-
-  useEffect(() => {
-    setCurrentLanguage(detectLanguage());
-    setCurrentPlatform(detectPlatform());
-  }, []);
 
   const {
     data: servicesData,
@@ -28,8 +23,8 @@ export function ServiceList() {
     fetchNextPage,
     isFetchingNextPage
   } = useServiceList({
-    language: currentLanguage,
-    platform: currentPlatform,
+    language: lang,
+    platform: platform,
     searchQuery: debouncedQuery
   });
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -132,7 +127,7 @@ export function ServiceList() {
             <ServiceItem
               key={service.id}
               service={service}
-              language={currentLanguage}
+              language={lang}
               onClick={handleServiceClick}
             />
           ))}

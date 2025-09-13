@@ -3,13 +3,15 @@ import Head from "next/head";
 import { BannerCarousel } from "@/features/banner/ui";
 import { ServiceList } from "@/features/service/ui";
 import { FavoriteList } from "@/features/favorite/ui";
-import { detectLanguage } from "@/shared/config/environment";
+import { detectLanguage, detectPlatform } from "@/shared/config/environment";
 
 export default function Home() {
   const [lang, setLang] = useState<"ko" | "en">("ko");
+  const [platform, setPlatform] = useState<"android" | "ios">("ios");
 
   useEffect(() => {
     setLang(detectLanguage());
+    setPlatform(detectPlatform());
   }, []);
 
   return (
@@ -26,7 +28,7 @@ export default function Home() {
           <BannerCarousel lang={lang} />
         </section>
         <FavoriteList />
-        <ServiceList />
+        <ServiceList lang={lang} platform={platform} />
       </main>
     </>
   );
