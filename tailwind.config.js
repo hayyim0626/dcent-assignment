@@ -9,7 +9,12 @@ module.exports = {
     "./src/shared/**/*.{js,ts,jsx,tsx,mdx}"
   ],
   theme: {
-    extend: {}
+    extend: {
+      animation: {
+        slideUp: "slide-up 0.3s ease-out forwards",
+        slideDown: "slide-down 0.3s ease-out forwards"
+      }
+    }
   },
   plugins: []
 };

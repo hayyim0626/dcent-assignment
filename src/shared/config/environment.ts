@@ -38,8 +38,5 @@ export const environment = {
   apiBaseUrl: process.env.NEXT_PUBLIC_API_BASE_URL || "/api/mock",
   platform: detectPlatform(),
   language: detectLanguage(),
-  buildEnv: (process.env.NEXT_PUBLIC_BUILD_ENV as BuildEnv) || "dev",
-  isDev: process.env.NODE_ENV === "development",
-  isStage: process.env.NODE_ENV === "staging",
-  isProd: process.env.NODE_ENV === "production"
+  buildEnv: (process.env.NEXT_PUBLIC_BUILD_ENV as BuildEnv) || "dev"
 };

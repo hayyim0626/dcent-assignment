@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Head from "next/head";
-import { BannerCarousel } from "@/widgets/bannerCarousel";
+import { BannerCarousel } from "@/features/banner";
+import { DappList } from "@/features/dapp";
 import { detectLanguage } from "@/shared/config/environment";
 
 export default function Home() {
@@ -19,9 +20,12 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className="min-h-screen bg-white">
-        <section className="pt-4 pb-6">
+      <main className="min-h-screen bg-white flex flex-col gap-4">
+        <section className="pt-4">
           <BannerCarousel lang={lang} />
+        </section>
+        <section>
+          <DappList />
         </section>
       </main>
     </>

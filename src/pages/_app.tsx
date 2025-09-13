@@ -6,7 +6,7 @@ import { QueryProvider } from "@/providers/queryProvider";
 function App({ Component, pageProps }: AppProps) {
   return (
     <QueryProvider>
-      <div className="max-w-[480px] min-h-screen mx-auto">
+      <div className="max-w-[480px] min-h-screen mx-auto relative">
         <Component {...pageProps} />
       </div>
     </QueryProvider>
