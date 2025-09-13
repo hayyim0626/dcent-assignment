@@ -1,15 +1,15 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
-import { DappFilters, DappApiResponse } from "@/entities/dapp/types";
+import { ServiceFilters, ServiceApiResponse } from "@/entities/service/types";
 import { environment } from "@/shared/config/environment";
 
-interface FetchServicesParams extends DappFilters {
+interface FetchServicesParams extends ServiceFilters {
   page: number;
   limit?: number;
 }
 
-const fetchDappList = async (
+const fetchServiceList = async (
   params: FetchServicesParams
-): Promise<DappApiResponse> => {
+): Promise<ServiceApiResponse> => {
   const searchParams = new URLSearchParams({
     page: params.page.toString(),
     limit: (params.limit || 20).toString(),
@@ -22,13 +22,13 @@ const fetchDappList = async (
     searchParams.append("search", params.searchQuery);
   }
 
-  const response = await fetch(`/api/mock/dapp?${searchParams}`);
+  const response = await fetch(`/api/mock/service?${searchParams}`);
 
   if (!response.ok) {
-    throw new Error("Failed to fetch dapp");
+    throw new Error("Failed to fetch service");
   }
 
-  const data: DappApiResponse = await response.json();
+  const data: ServiceApiResponse = await response.json();
 
   if (!data.success) {
     throw new Error("API returned error");
@@ -37,11 +37,11 @@ const fetchDappList = async (
   return data;
 };
 
-export const useDappList = (filters: DappFilters) => {
+export const useServiceList = (filters: ServiceFilters) => {
   return useInfiniteQuery({
     queryKey: ["services", filters],
     queryFn: ({ pageParam = 1 }) =>
-      fetchDappList({ ...filters, page: pageParam }),
+      fetchServiceList({ ...filters, page: pageParam }),
     getNextPageParam: (lastPage) =>
       lastPage.pagination.hasMore ? lastPage.pagination.page + 1 : undefined,
     initialPageParam: 1

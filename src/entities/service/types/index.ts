@@ -1,4 +1,4 @@
-export interface Dapp {
+export interface Service {
   id: string;
   name: string;
   description: {
@@ -15,16 +15,16 @@ export interface Dapp {
   };
 }
 
-export interface DappFilters {
+export interface ServiceFilters {
   language: "ko" | "en";
   platform: "android" | "ios";
   environment: "dev" | "stage" | "prod";
   searchQuery?: string;
 }
 
-export interface DappApiResponse {
+export interface ServiceApiResponse {
   success: boolean;
-  data: Dapp[];
+  data: Service[];
   pagination: {
     page: number;
     limit: number;

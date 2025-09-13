@@ -1,8 +1,12 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { Dapp, DappFilters, DappApiResponse } from "@/entities/dapp/types";
+import {
+  Service,
+  ServiceFilters,
+  ServiceApiResponse
+} from "@/entities/service/types";
 import { IMAGE_BASE_URL } from "@/shared/consts";
 
-const mockDapps: Dapp[] = [
+const mockServices: Service[] = [
   {
     id: "moonpay",
     name: "MoonPay",
@@ -146,14 +150,14 @@ const mockDapps: Dapp[] = [
 ];
 
 // // 1000개 이상의 Mock 데이터 생성을 위한 확장
-// const generateExtendedServices = (): Dapp[] => {
+// const generateExtendedServices = (): Service[] => {
 //   const baseServices = [...mockServices];
-//   const extendedServices: Dapp[] = [];
+//   const extendedServices: Service[] = [];
 
 //   for (let i = 0; i < 200; i++) {
 //     // 200번 반복해서 1800개 추가 생성
 //     baseServices.forEach((service, index) => {
-//       const duplicatedService: Dapp = {
+//       const duplicatedService: Service = {
 //         ...service,
 //         id: `${service.id}-${i}-${index}`,
 //         name: `${service.name} ${i + 1}-${index + 1}`,
@@ -167,7 +171,10 @@ const mockDapps: Dapp[] = [
 
 // const allServices = generateExtendedServices();
 
-const filterServices = (services: Dapp[], filters: DappFilters): Dapp[] => {
+const filterServices = (
+  services: Service[],
+  filters: ServiceFilters
+): Service[] => {
   return services.filter((service) => {
     if (!service.visibility.languages.includes(filters.language)) {
       return false;
@@ -196,7 +203,7 @@ const filterServices = (services: Dapp[], filters: DappFilters): Dapp[] => {
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<DappApiResponse>
+  res: NextApiResponse<ServiceApiResponse>
 ) {
   try {
     const {
@@ -211,14 +218,14 @@ export default async function handler(
     const pageNum = parseInt(page as string);
     const limitNum = parseInt(limit as string);
 
-    const filters: DappFilters = {
+    const filters: ServiceFilters = {
       language: language as "ko" | "en",
       platform: platform as "android" | "ios",
       environment: environment as "dev" | "stage" | "prod",
       searchQuery: search as string
     };
 
-    const filteredServices = filterServices(mockDapps, filters);
+    const filteredServices = filterServices(mockServices, filters);
 
     const startIndex = (pageNum - 1) * limitNum;
     const endIndex = startIndex + limitNum;

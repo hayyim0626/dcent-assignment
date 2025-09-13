@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { Dapp } from "@/entities/dapp/types";
+import { Service } from "@/entities/service/types";
 import Image from "next/image";
 
 interface BottomSheetModalProps {
   isOpen: boolean;
   onClose: () => void;
-  data: Dapp;
+  data: Service;
   language: "ko" | "en";
 }
 

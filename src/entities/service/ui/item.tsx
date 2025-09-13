@@ -1,14 +1,14 @@
 import React from "react";
 import Image from "next/image";
-import { Dapp } from "@/entities/dapp/types";
+import { Service } from "@/entities/service/types";
 
-interface DappListProps {
-  service: Dapp;
+interface ServiceListProps {
+  service: Service;
   language: "ko" | "en";
-  onClick?: (service: Dapp) => void;
+  onClick?: (service: Service) => void;
 }
 
-export function DappItem({ service, language, onClick }: DappListProps) {
+export function ServiceItem({ service, language, onClick }: ServiceListProps) {
   const description =
     service.description[language] ||
     service.description.en ||

@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { DappItem } from "@/entities/dapp/ui/item";
-import { Dapp } from "@/entities/dapp/types";
-import { useDappList } from "@/entities/dapp/hooks/useDappList";
+import { ServiceItem } from "@/entities/service/ui/item";
+import { Service } from "@/entities/service/types";
+import { useServiceList } from "@/entities/service/hooks/useServiceList";
 import { useVirtualList, useSearch } from "@/shared/hooks";
 import { ListLoader } from "@/shared/ui";
 import { detectLanguage, detectPlatform } from "@/shared/config/environment";
 import { BottomSheetModal } from "./bottomSheet";
 
-export function DappList() {
+export function ServiceList() {
   const [currentLanguage, setCurrentLanguage] = useState<"ko" | "en">("ko");
   const [currentPlatform, setCurrentPlatform] = useState<"android" | "ios">(
     "ios"
@@ -27,14 +27,14 @@ export function DappList() {
     hasNextPage,
     fetchNextPage,
     isFetchingNextPage
-  } = useDappList({
+  } = useServiceList({
     language: currentLanguage,
     platform: currentPlatform,
     environment: process.env.NEXT_PUBLIC_BUILD_ENV as "dev" | "stage" | "prod",
     searchQuery: debouncedQuery
   });
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedApp, setSelectedApp] = useState<Dapp | null>(null);
+  const [selectedService, setSelectedService] = useState<Service | null>(null);
 
   const { loadMoreRef, flattenedItems } = useVirtualList({
     data: servicesData?.pages || [],
@@ -43,8 +43,8 @@ export function DappList() {
     isFetchingNextPage
   });
 
-  const handleServiceClick = (service: Dapp) => {
-    setSelectedApp(service);
+  const handleServiceClick = (service: Service) => {
+    setSelectedService(service);
     setIsModalOpen(true);
   };
 
@@ -52,7 +52,7 @@ export function DappList() {
     setIsModalOpen(false);
 
     setTimeout(() => {
-      setSelectedApp(null);
+      setSelectedService(null);
     }, 300);
   };
 
@@ -130,7 +130,7 @@ export function DappList() {
 
         {!isLoading &&
           flattenedItems.map((service) => (
-            <DappItem
+            <ServiceItem
               key={service.id}
               service={service}
               language={currentLanguage}
@@ -175,7 +175,7 @@ export function DappList() {
       <BottomSheetModal
         isOpen={isModalOpen}
         onClose={handleCloseModal}
-        data={selectedApp as Dapp}
+        data={selectedService as Service}
         language="ko"
       />
     </div>
