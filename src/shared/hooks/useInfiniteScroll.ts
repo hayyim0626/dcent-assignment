@@ -2,19 +2,19 @@ import { useMemo } from "react";
 import { useInView } from "react-intersection-observer";
 import { useEffect } from "react";
 
-interface UseVirtualListProps {
+interface InfiniteScrollProps {
   data: any[];
   hasNextPage: boolean;
   fetchNextPage: () => void;
   isFetchingNextPage: boolean;
 }
 
-export const useVirtualList = ({
+export const useInfiniteScroll = ({
   data,
   hasNextPage,
   fetchNextPage,
   isFetchingNextPage
-}: UseVirtualListProps) => {
+}: InfiniteScrollProps) => {
   const { ref: loadMoreRef, inView } = useInView({
     threshold: 0.1,
     rootMargin: "100px"

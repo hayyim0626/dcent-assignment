@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { ServiceItem } from "@/entities/service/ui/item";
 import { Service } from "@/entities/service/types";
 import { useServiceList } from "@/entities/service/hooks/useServiceList";
-import { useVirtualList, useSearch } from "@/shared/hooks";
+import { useInfiniteScroll, useSearch } from "@/shared/hooks";
 import { ListLoader } from "@/shared/ui";
 import { detectLanguage, detectPlatform } from "@/shared/config/environment";
 import { BottomSheetModal } from "./bottomSheet";
@@ -30,13 +30,12 @@ export function ServiceList() {
   } = useServiceList({
     language: currentLanguage,
     platform: currentPlatform,
-    environment: process.env.NEXT_PUBLIC_BUILD_ENV as "dev" | "stage" | "prod",
     searchQuery: debouncedQuery
   });
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedService, setSelectedService] = useState<Service | null>(null);
 
-  const { loadMoreRef, flattenedItems } = useVirtualList({
+  const { loadMoreRef, flattenedItems } = useInfiniteScroll({
     data: servicesData?.pages || [],
     hasNextPage: hasNextPage || false,
     fetchNextPage,

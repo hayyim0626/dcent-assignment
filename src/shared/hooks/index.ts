@@ -1,2 +1,2 @@
 export { useSearch } from "./useSearch";
-export { useVirtualList } from "./useVirtualList";
+export { useInfiniteScroll } from "./useInfiniteScroll";
