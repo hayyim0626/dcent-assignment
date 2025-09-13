@@ -1,40 +1,88 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/pages/api-reference/create-next-app).
+## 🛠 기술 스택
 
-## Getting Started
+### Frontend Framework
 
-First, run the development server:
+- **Next.js**
+
+### 상태 관리 & 데이터 fetching & caching
+
+- **@tanstack/react-query**
+
+### 스타일링
+
+- **Tailwind**
+
+### UI 컴포넌트 & 상호작용
+
+- **react-slick** - 캐러셀/슬라이더 컴포넌트
+- **react-intersection-observer** - 무한 스크롤 구현
+
+### 성능 최적화
+
+- **use-debounce** - 검색 기능 성능 최적화
+
+## 🚀 프로젝트 실행 방법
+
+### 개발 서버 실행
 
 ```bash
-npm run dev
-# or
 yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 프로덕션 빌드
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+```bash
+yarn build
+yarn start
+```
 
-[API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+### 환경별 빌드
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) instead of React pages.
+```bash
+yarn build:dev
+yarn build:stage
+yarn build:prod
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/pages/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 📁 프로젝트 구조
 
-## Learn More
+이 프로젝트는 **FSD(Feature-Sliced Design)** 아키텍처를 기반으로 구성되어 있습니다.
 
-To learn more about Next.js, take a look at the following resources:
+```
+src/
+├── entities/           # 비즈니스 엔티티
+│   ├── banner/        # 배너 관련 로직
+│   ├── favorite/      # 즐겨찾기 관련 로직
+│   └── service/       # 서비스 관련 로직
+├── features/          # 기능 단위 컴포넌트
+│   ├── banner/        # 배너 캐러셀 기능
+│   ├── favorite/      # 즐겨찾기 관리 기능
+│   └── service/       # 서비스 목록 기능
+├── pages/             # Next.js 페이지 및 API Route
+├── providers/         # 전역 프로바이더 (React Query 관련)
+├── shared/            # 공통 유틸리티
+│   ├── config/        # 환경 설정 (ios/android 및 en/ko 구분 함수)
+│   ├── hooks/         # 공통 훅
+│   ├── hooks/         # 공통 훅
+│   ├── ui/            # 공통 UI 컴포넌트
+│   └── utils/         # 유틸리티 함수
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn-pages-router) - an interactive Next.js tutorial.
+## 🎯 주요 구현 요소
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### 1. 배너
 
-## Deploy on Vercel
+- **react-slick** 라이브러리 활용
+- 자동 재생 및 터치/스와이프 지원
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### 2. 즐겨찾기
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/pages/building-your-application/deploying) for more details.
+- 모달을 통한 즐겨찾기 목록 삭제 기능
+- useMutation 기반의 삭제 기능 구현
+
+### 3. 서비스 리스트
+
+- Infinite scroll 구현
+- 실시간 검색 및 필터링 기능
+- useInfiniteQuery 기반의 fetching/caching
+- useInfiniteScroll hook 기반의 intersection observer 기능 구현
