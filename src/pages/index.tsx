@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Head from "next/head";
 import { BannerCarousel } from "@/features/banner";
 import { DappList } from "@/features/dapp";
+import { FavoriteList } from "@/features/favorite/ui";
 import { detectLanguage } from "@/shared/config/environment";
 
 export default function Home() {
@@ -24,9 +25,8 @@ export default function Home() {
         <section className="pt-4">
           <BannerCarousel lang={lang} />
         </section>
-        <section>
-          <DappList />
-        </section>
+        <FavoriteList />
+        <DappList />
       </main>
     </>
   );

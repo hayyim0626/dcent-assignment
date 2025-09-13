@@ -1,0 +1,1 @@
+export { useDeleteFavorite } from "./useDeleteFavorite";

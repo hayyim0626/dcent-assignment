@@ -145,6 +145,28 @@ const mockDapps: Dapp[] = [
   }
 ];
 
+// // 1000개 이상의 Mock 데이터 생성을 위한 확장
+// const generateExtendedServices = (): Dapp[] => {
+//   const baseServices = [...mockServices];
+//   const extendedServices: Dapp[] = [];
+
+//   for (let i = 0; i < 200; i++) {
+//     // 200번 반복해서 1800개 추가 생성
+//     baseServices.forEach((service, index) => {
+//       const duplicatedService: Dapp = {
+//         ...service,
+//         id: `${service.id}-${i}-${index}`,
+//         name: `${service.name} ${i + 1}-${index + 1}`,
+//       };
+//       extendedServices.push(duplicatedService);
+//     });
+//   }
+
+//   return [...baseServices, ...extendedServices];
+// };
+
+// const allServices = generateExtendedServices();
+
 const filterServices = (services: Dapp[], filters: DappFilters): Dapp[] => {
   return services.filter((service) => {
     if (!service.visibility.languages.includes(filters.language)) {
@@ -176,14 +198,6 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<DappApiResponse>
 ) {
-  if (req.method !== "GET") {
-    return res.status(405).json({
-      success: false,
-      data: [],
-      pagination: { page: 1, limit: 20, total: 0, hasMore: false }
-    });
-  }
-
   try {
     const {
       page = "1",
