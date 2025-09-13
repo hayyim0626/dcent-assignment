@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import Image from "next/image";
 import { useFavorite } from "@/entities/favorite/hooks";
 import { FavoriteItem } from "@/entities/favorite/types";
-import { DappItemSkeleton } from "@/entities/dapp/ui/item";
 import { useDeleteFavorite } from "@/features/favorite/hooks";
+import { ListLoader } from "@/shared/ui";
 import { ConfirmModal } from "./modal";
 
 export function FavoriteList() {
@@ -46,7 +46,7 @@ export function FavoriteList() {
     return (
       <>
         {Array.from({ length: 3 }).map((_, index) => (
-          <DappItemSkeleton key={`loading-${index}`} />
+          <ListLoader key={`loading-${index}`} />
         ))}
       </>
     );

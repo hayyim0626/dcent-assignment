@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { DappItem, DappItemSkeleton } from "@/entities/dapp/ui/item";
+import { DappItem } from "@/entities/dapp/ui/item";
 import { Dapp } from "@/entities/dapp/types";
 import { useDappList } from "@/entities/dapp/hooks/useDappList";
 import { useVirtualList, useSearch } from "@/shared/hooks";
+import { ListLoader } from "@/shared/ui";
 import { detectLanguage, detectPlatform } from "@/shared/config/environment";
 import { BottomSheetModal } from "./bottomSheet";
 
@@ -67,7 +68,10 @@ export function DappList() {
 
   return (
     <div className={`w-full`}>
-      <div className="p-4 border-b border-gray-100">
+      <div className="border-b border-gray-100">
+        <h1 className="text-xl font-bold text-gray-900 pb-2">목록</h1>
+      </div>
+      <div className="pt-2">
         <div className="relative">
           <input
             type="text"
@@ -76,7 +80,6 @@ export function DappList() {
             placeholder="서비스 이름이나 설명으로 검색..."
             className="w-full pl-10 pr-10 py-3 border border-gray-300 rounded-lg focus:outline-nonetext-base text-black"
           />
-
           <div className="absolute left-3 top-1/2 transform -translate-y-1/2">
             <svg
               className="w-5 h-5 text-gray-400"
@@ -120,7 +123,7 @@ export function DappList() {
         {isLoading && (
           <>
             {Array.from({ length: 10 }).map((_, index) => (
-              <DappItemSkeleton key={index} />
+              <ListLoader key={index} />
             ))}
           </>
         )}
@@ -163,7 +166,7 @@ export function DappList() {
           {isFetchingNextPage && (
             <>
               {Array.from({ length: 3 }).map((_, index) => (
-                <DappItemSkeleton key={`loading-${index}`} />
+                <ListLoader key={`loading-${index}`} />
               ))}
             </>
           )}

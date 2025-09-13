@@ -1,7 +1,6 @@
 import React from "react";
 import Image from "next/image";
 import { Dapp } from "@/entities/dapp/types";
-import { Skeleton } from "@/shared/ui";
 
 interface DappListProps {
   service: Dapp;
@@ -17,9 +16,6 @@ export function DappItem({ service, language, onClick }: DappListProps) {
     "";
 
   const handleClick = () => {
-    // if (service.url) {
-    //   window.open(service.url, "_blank");
-    // }
     onClick?.(service);
   };
 
@@ -43,21 +39,3 @@ export function DappItem({ service, language, onClick }: DappListProps) {
     </div>
   );
 }
-
-export const DappItemSkeleton: React.FC = () => (
-  <div className="flex items-center space-x-4 p-4">
-    <Skeleton className="w-12 h-12 rounded-xl" />
-    <div className="flex-1 space-y-2">
-      <div className="flex items-center justify-between">
-        <Skeleton className="h-5 w-32" />
-        <Skeleton className="h-4 w-4" />
-      </div>
-      <Skeleton className="h-4 w-full" />
-      <Skeleton className="h-4 w-3/4" />
-      <div className="flex space-x-2">
-        <Skeleton className="h-6 w-16 rounded-md" />
-        <Skeleton className="h-6 w-20 rounded-md" />
-      </div>
-    </div>
-  </div>
-);
