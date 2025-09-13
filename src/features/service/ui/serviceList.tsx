@@ -25,7 +25,8 @@ export function ServiceList({ lang, platform }: ServiceListProps) {
   } = useServiceList({
     language: lang,
     platform: platform,
-    searchQuery: debouncedQuery
+    searchQuery: debouncedQuery,
+    environment: process.env.NEXT_PUBLIC_BUILD_ENV as "dev" | "stage" | "prod"
   });
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedService, setSelectedService] = useState<Service | null>(null);

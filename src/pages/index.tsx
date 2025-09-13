@@ -7,7 +7,7 @@ import { detectLanguage, detectPlatform } from "@/shared/config/environment";
 
 export default function Home() {
   const [lang, setLang] = useState<"ko" | "en">("ko");
-  const [platform, setPlatform] = useState<"android" | "ios">("ios");
+  const [platform, setPlatform] = useState<"android" | "ios">("android");
 
   useEffect(() => {
     setLang(detectLanguage());

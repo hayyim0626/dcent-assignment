@@ -1,7 +1,8 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { ServiceFilters, ServiceApiResponse } from "@/entities/service/types";
+import { environment } from "@/shared/config/environment";
 
-interface FetchServicesParams extends Omit<ServiceFilters, "environment"> {
+interface FetchServicesParams extends ServiceFilters {
   page: number;
   limit?: number;
 }
@@ -13,7 +14,8 @@ const fetchServiceList = async (
     page: params.page.toString(),
     limit: (params.limit || 20).toString(),
     language: params.language,
-    platform: params.platform
+    platform: params.platform,
+    environment: environment.buildEnv
   });
 
   if (params.searchQuery) {
@@ -35,9 +37,7 @@ const fetchServiceList = async (
   return data;
 };
 
-export const useServiceList = (
-  filters: Omit<ServiceFilters, "environment">
-) => {
+export const useServiceList = (filters: ServiceFilters) => {
   return useInfiniteQuery({
     queryKey: ["services", filters],
     queryFn: ({ pageParam = 1 }) =>
