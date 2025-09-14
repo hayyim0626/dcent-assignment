@@ -210,7 +210,7 @@ export default async function handler(
       limit = "20",
       language = "ko",
       platform = "ios",
-      environment = process.env.NEXT_PUBLIC_BUILD_ENV,
+      environment = process.env.NEXT_PUBLIC_BUILD_ENV || "dev",
       search = ""
     } = req.query;
 
